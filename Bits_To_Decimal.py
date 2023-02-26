@@ -31,6 +31,8 @@ def CAN_To_Decimal(data, signed, res):
     
 #                                      |  |
 #             Data length code (2byte) v  v
-#                                          |              ||               |
-#                                          v  Data(16bit) vv    maradék    v
+#                                          |              |
+#                                          v  Data(16bit) v
+#                                                          |               |
+#                                                          v    maradék    v
 print( CAN_To_Decimal("00000000000000000010100000000000000022222222222222222",1,1))
