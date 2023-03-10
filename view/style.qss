@@ -1,0 +1,23 @@
+SideBarButton {
+    background: green;
+}
+
+SideBar {
+    background: red;
+}
+
+RightBar {
+    background-color: red;
+}
+
+CenterPanel {
+    color: red;
+}
+
+DashboardWindow {
+    background-color: gray;
+}
+
+MainContainer {
+    background-color: red;
+}
