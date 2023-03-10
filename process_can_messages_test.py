@@ -1,56 +1,65 @@
-from struct import * 
+from struct import pack
+from can import Message
+from DataType import DataType
+from Sensor import Sensor
+from SensorManager import SensorManager
+from NumberType import NumberType
 
-# Tudom, hogy külön fájlba kell, meg csúnya meg minden, csak első próba, hogy egyáltalán ilyenre kell-e gondolni
+rpm = DataType(NumberType.SIGNED_INT, 1, '1/min')
+temperature = DataType(NumberType.SIGNED_INT, 0.1, '°C')
+current = DataType(NumberType.SIGNED_INT, 0.1, 'A')
+mcurrent = DataType(NumberType.SIGNED_INT, 1, 'mA')
+voltage = DataType(NumberType.SIGNED_INT, 0.01, 'V')
+soc = DataType(NumberType.UNSIGNED_INT, 0.1, '%')
+throttle_position = DataType(NumberType.SIGNED_INT, 1, '%')
+switch_position = DataType(NumberType.UNSIGNED_INT, 1, '')
+gps_position = DataType(NumberType.FLOAT, 0.01, '°')
+speed = DataType(NumberType.SIGNED_INT, 0.1, 'km/h')
+roll_pitch_degree = DataType(NumberType.SIGNED_INT, 1, '°')
+heading = DataType(NumberType.UNSIGNED_INT, 1, 'sec')
+absoluttime = DataType(NumberType.UNSIGNED_INT, 1, 'sec')
+power = DataType(NumberType.SIGNED_INT, 1, 'mW')
+acceleration = DataType(NumberType.SIGNED_INT, 1, 'm/s^2')
+flow = DataType(NumberType.UNSIGNED_INT, 1, 'L\sec')
+distance = DataType(NumberType.SIGNED_INT, 1, 'mm')
+level = DataType(NumberType.UNSIGNED_INT, 1, '%')
+percent = DataType(NumberType.SIGNED_INT, 0.1, '%')
+degree = DataType(NumberType.SIGNED_INT, 0.1, '°')
 
-FLOAT = '<f'
-DOUBLE = '<d'
-INT = 'i'
+def printMessage(sensor_id, sensor_name, message, unit):
+    print(type(message))
+    print('sensor id: ' + str(sensor_id) +' sensor name: '+ sensor_name + ' message: ' + str(message) + ' ' + unit)
 
-
-class Sensor:
-    def __init__(self, id, data_type):
-        self.id = id
-        self.data_type = data_type
-    def add_data(self, data):
-        print(data)
-        if(self.data_type == INT):
-            decoded_data =int(data, 2)
-            print(decoded_data)
-
-
-class SensorManager:
-    sensors = dict()
-    def __init__(self) -> None:
-        pass
-    def add_sensor(self, sensor):
-        self.sensors.update({sensor.id: sensor})
-    def receive_message(self, message):
-        # data = self.sensors[sensor_id].add_data(message)
-        message_id, data  = self.split_message(message) 
-        sensor : Sensor = self.sensors.get(message_id)
-        sensor.add_data(data)
-
-    def split_message(self, can_message):
-        # sof = can_message[:1]
-        # priority = can_message[1:2]
-        message_id = can_message[2:9]
-        # node_id = can_message[9:121]
-        # rtr = can_message[12:13]
-        # ide = can_message[13:14]
-        # r1 = can_message[14:15]
-        # r0 = can_message[15:16]
-        dlc = can_message[16:20]
-        # data_length_bytes = bytes.
-        data_length = int(dlc)
-        data = can_message[20:20+data_length*8]
-        # print('can_message: ' + can_message)
-        # print('sof: ' + sof + ' priority: ' + priority + ' message_id: ' + message_id + ' data_length: ' + str(data_length) + ' data: ' + data)
-        return (message_id, data)
-
-can_original_message = "01000000100000000001100000001000000000000001111111111"
 sensors = SensorManager()
-sensorA = Sensor("0000001", INT)
-sensorB = Sensor("0000010", INT)
+sensorA = Sensor(1, 'SensorA', rpm, printMessage)
+sensorB = Sensor(2, 'SensorB', temperature, printMessage)
+sensorC = Sensor(3, 'SensorC', gps_position, printMessage)
+sensorD = Sensor(4, 'SensorD', soc, printMessage)
+
 sensors.add_sensor(sensorA)
 sensors.add_sensor(sensorB)
-sensors.receive_message(can_original_message)
+sensors.add_sensor(sensorC)
+sensors.add_sensor(sensorD)
+
+# can_original_message = "01000000100000000001100000001000000000000001111111111"
+
+data0 = pack(NumberType.SIGNED_INT.value, 15)
+data1 = pack(NumberType.SIGNED_INT.value, -20)
+data2 = pack(NumberType.SIGNED_INT.value, 123)
+data3 = pack(NumberType.FLOAT.value, 118.12356)
+data4 = pack(NumberType.FLOAT.value, -585.235)
+data5 = pack(NumberType.UNSIGNED_INT.value, 836)
+
+message0 = Message(data=data0, arbitration_id=1)
+message1 = Message(data=data1, arbitration_id=1)
+message2 = Message(data=data2, arbitration_id=2)
+message3 = Message(data=data3, arbitration_id=3)
+message4 = Message(data=data4, arbitration_id=3)
+message5 = Message(data=data5, arbitration_id=4)
+
+sensors.receive_message(message0)
+sensors.receive_message(message1)
+sensors.receive_message(message2)
+sensors.receive_message(message3)
+sensors.receive_message(message4)
+sensors.receive_message(message5)
