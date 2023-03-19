@@ -1,8 +1,9 @@
-from PySide6.QtWidgets import QWidget, QHBoxLayout
+from PySide6.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout
 
 from Dashboard.view.center_panel import CenterPanel, PanelSwitchDirection
 from Dashboard.view.sidebars.left_bar import LeftBar
 from Dashboard.view.sidebars.right_bar import RightBar
+from Dashboard.view.sidebars.top_bar import TopBar
 
 
 class MainContainer(QWidget):
@@ -11,26 +12,25 @@ class MainContainer(QWidget):
         super().__init__()
 
         # Main Layout
-        main_layout = QHBoxLayout()
+        main_layout = QVBoxLayout(self)
         main_layout.setContentsMargins(0, 0, 0, 0)
-        self.setLayout(main_layout)
-
-        # Right sidebar
-        self.right_sidebar = RightBar()
-
-        # Left sidebar
-        self.left_sidebar = LeftBar()
 
         # Top sidebar
-        # TODO implement
+        self.top_sidebar = TopBar()
 
-        # CenterPanel
+        # Middle part
+        self.right_sidebar = RightBar()
+        self.left_sidebar = LeftBar()
         self.center_panel = CenterPanel()
 
+        middle_part_layout = QHBoxLayout()
+        middle_part_layout.addWidget(self.left_sidebar)
+        middle_part_layout.addWidget(self.center_panel)
+        middle_part_layout.addWidget(self.right_sidebar)
+
         # Add layouts to main layout
-        main_layout.addWidget(self.left_sidebar)
-        main_layout.addWidget(self.center_panel)
-        main_layout.addWidget(self.right_sidebar)
+        main_layout.addWidget(self.top_sidebar)
+        main_layout.addLayout(middle_part_layout)
 
         # Connect signals
         self.right_sidebar.sig_next_panel.connect(

@@ -14,8 +14,7 @@ class BatteryTemperatureWidget(QWidget):
         # )
 
         # Create main layout
-        main_layout = QVBoxLayout()
-        self.setLayout(main_layout)
+        main_layout = QVBoxLayout(self)
 
         # Panel name
         name_label = QLabel('BatteryTemperature')

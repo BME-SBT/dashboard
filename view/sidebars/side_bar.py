@@ -17,9 +17,8 @@ class SideBar(QWidget):
         self.setFixedWidth(50)
 
         # Layout
-        self.main_layout = QVBoxLayout()
+        self.main_layout = QVBoxLayout(self)
         self.main_layout.setContentsMargins(0, 0, 0, 0)
-        self.setLayout(self.main_layout)
 
         # Image Widgets
         # info: Create separate variables to enable more accurate positioning if needed

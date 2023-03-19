@@ -2,11 +2,10 @@ from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QWidget
 
 
-class TopBar(QWidget):
-    """The top bar that contains the warning icons."""
+class PermanentPanel(QWidget):
     def __init__(self):
         super().__init__()
+        self.setFixedSize(850, 100)
 
         # Style
-        self.setFixedHeight(50)
         self.setAttribute(Qt.WidgetAttribute.WA_StyledBackground)

@@ -14,5 +14,10 @@ class LeftBar(SideBar):
         self.second_btn.setText('<')
         self.third_btn.setText('ESC')
 
+        # Button style
+        self.first_btn.setProperty('side', 'left')
+        self.second_btn.setProperty('side', 'left')
+        self.third_btn.setProperty('side', 'left')
+
         # Connect signals
         self.second_btn.clicked.connect(self.sig_previous_panel)

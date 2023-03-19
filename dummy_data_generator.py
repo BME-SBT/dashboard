@@ -6,7 +6,7 @@ from typing import Tuple
 from PySide6.QtCore import QThread, Signal
 from PySide6.QtWidgets import QApplication
 
-from process_can_messages_test import SensorManager
+# from process_can_messages_test import SensorManager
 
 
 class DummyData:
@@ -40,7 +40,7 @@ class DummyData:
 class DummyDataGenerator(QThread):
     def __init__(self):
         super().__init__()
-        self.manager = SensorManager()
+        # self.manager = SensorManager()
 
         self.stop = False
 

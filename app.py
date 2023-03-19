@@ -16,8 +16,8 @@ class DashboardWindow(QMainWindow):
         self.setContentsMargins(0, 0, 0, 0)
 
         # Create main container
-        main_container = MainContainer()
-        self.setCentralWidget(main_container)
+        self.main_container = MainContainer()
+        self.setCentralWidget(self.main_container)
 
         # Style refresh shortcut
         refresh_shortcut = QShortcut(QKeySequence('Ctrl+R'), self)
