@@ -1,23 +1,49 @@
+* {
+    color: #1b1b1c;
+    font-weight: 600;
+    font-size: 25px;
+}
+
 SideBarButton {
-    background: green;
+    color: #12282E;
+    background: #90B8C2;
+}
+
+SideBarButton[side="right"] {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+SideBarButton[side="left"] {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+SideBarButton:hover {
+    background: #EAEDEE;
 }
 
 SideBar {
-    background: red;
+    background: #90B8C2;
 }
 
-RightBar {
-    background-color: red;
+TopBar {
+    background-color: #3a3d42;
 }
 
-CenterPanel {
-    color: red;
+AbstractPanel {
+    background-color: #cecedb;
+}
+
+PermanentPanel {
+    background-color: #494c52;
 }
 
 DashboardWindow {
-    background-color: gray;
+    background-color: #26292D;
 }
 
-MainContainer {
-    background-color: red;
+.TitleLabel {
+    padding: 5px;
+    color: #151521;
 }
