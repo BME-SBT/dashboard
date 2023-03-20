@@ -9,7 +9,7 @@ class BatteryCurrentWidget(QWidget):
         main_layout = QVBoxLayout(self)
 
         # Panel name
-        name_label = QLabel('BatteryCurrent')
+        name_label = QLabel('BatCurr')
         main_layout.addWidget(name_label)
 
         # Panel value

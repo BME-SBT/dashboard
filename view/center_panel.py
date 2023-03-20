@@ -2,7 +2,7 @@ from enum import Enum
 from typing import List
 
 from PySide6.QtCore import Qt
-from PySide6.QtWidgets import QWidget, QVBoxLayout, QLabel
+from PySide6.QtWidgets import QWidget, QVBoxLayout
 
 from Dashboard.view.panels.abstract_panel import AbstractPanel
 from Dashboard.view.panels.accubox_panel import AccuboxPanel

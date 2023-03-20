@@ -1,3 +1,4 @@
+from PySide6.QtCore import Signal
 from PySide6.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout
 
 from Dashboard.view.center_panel import CenterPanel, PanelSwitchDirection
@@ -8,6 +9,7 @@ from Dashboard.view.sidebars.top_bar import TopBar
 
 class MainContainer(QWidget):
     """The main container that contains the switchable pages."""
+
     def __init__(self):
         super().__init__()
 

@@ -7,6 +7,8 @@ class BatteryTemperatureWidget(QWidget):
 
     def __init__(self, sensor_id):
         super().__init__()
+
+        self.sensor_id = 111111
         # self.sensor = SensorManager.get_sensor(sensor_id)
         #
         # self.sensor.register_callback(
@@ -17,7 +19,7 @@ class BatteryTemperatureWidget(QWidget):
         main_layout = QVBoxLayout(self)
 
         # Panel name
-        name_label = QLabel('BatteryTemperature')
+        name_label = QLabel('BatTemp')
         main_layout.addWidget(name_label)
 
         # Panel value
