@@ -1,10 +1,9 @@
-from PySide6.QtCore import Signal
 from PySide6.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout
 
-from Dashboard.view.center_panel import CenterPanel, PanelSwitchDirection
-from Dashboard.view.sidebars.left_bar import LeftBar
-from Dashboard.view.sidebars.right_bar import RightBar
-from Dashboard.view.sidebars.top_bar import TopBar
+from gui.view.center_panel import CenterPanel, PanelSwitchDirection
+from gui.view.sidebars.left_bar import LeftBar
+from gui.view.sidebars.right_bar import RightBar
+from gui.view.sidebars.top_bar import TopBar
 
 
 class MainContainer(QWidget):

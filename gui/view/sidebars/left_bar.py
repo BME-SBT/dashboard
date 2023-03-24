@@ -1,6 +1,6 @@
 from PySide6.QtCore import Signal
 
-from Dashboard.view.sidebars.side_bar import SideBar
+from gui.view.sidebars.side_bar import SideBar
 
 
 class LeftBar(SideBar):

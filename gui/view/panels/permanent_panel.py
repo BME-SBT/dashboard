@@ -1,8 +1,8 @@
 from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QWidget, QHBoxLayout
 
-from Dashboard.view.panel_elements.battery_current_widget import BatteryCurrentWidget
-from Dashboard.view.panel_elements.battery_temperature_widget import BatteryTemperatureWidget
+from gui.view.panel_elements.battery_current_widget import BatteryCurrentWidget
+from gui.view.panel_elements.battery_temperature_widget import BatteryTemperatureWidget
 
 
 class PermanentPanel(QWidget):

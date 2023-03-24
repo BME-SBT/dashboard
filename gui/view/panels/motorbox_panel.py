@@ -1,6 +1,6 @@
 from PySide6.QtWidgets import QVBoxLayout, QLabel
 
-from Dashboard.view.panels.abstract_panel import AbstractPanel
+from gui.view.panels.abstract_panel import AbstractPanel
 
 
 class MotorboxPanel(AbstractPanel):
