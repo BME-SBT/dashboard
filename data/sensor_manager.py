@@ -22,7 +22,7 @@ class SensorManager:
             logging.warn(f"unknown CAN ID: {message_id}")
 
     @classmethod
-    def get_sensor(cls, id: int) -> Sensor | None:
+    def get_sensor(cls, id: int) -> Sensor:
         if id in cls.sensors.keys():
             return cls.sensors[id]
         return None
