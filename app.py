@@ -53,7 +53,7 @@ class CANThread(QThread):
                         SensorManager.receive_message(message)
             except Exception as e:
                 print(e)
-                LOGGER.warn('restarting bus after timeout')
+                LOGGER.warning('restarting bus after timeout')
                 QThread.msleep(500)
 
     def create_bus(self):
