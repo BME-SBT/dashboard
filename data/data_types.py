@@ -5,7 +5,7 @@ import struct
 class NumberType(Enum):
     FLOAT = '>f'
     DOUBLE = '>d'
-    SIGNED_INT = '>i'
+    INT = '>i'
     UNSIGNED_INT = '>I'
     SHORT = '>h'
     UNSIGNED_SHORT = '>H'
@@ -28,5 +28,23 @@ class DataType:
         return struct.pack(self.number_type.value, int((value / self.resolution)))
 
 
-# TODO: Port Bakonyi's types
 RPM = DataType(NumberType.SHORT, 1, '1/min')
+TEMPERATURE = DataType(NumberType.SHORT, 0.1, '°C')
+CURRENT = DataType(NumberType.SHORT, 0.1, 'A')
+MCURRENT = DataType(NumberType.SHORT, 1, 'mA')
+VOLTAGE = DataType(NumberType.SHORT, 0.01, 'V')
+SOC = DataType(NumberType.UNSIGNED_SHORT, 0.1, '%')
+THROTTLE_POSITION = DataType(NumberType.SHORT, 1, '%')
+SWITCH_POSITION = DataType(NumberType.UNSIGNED_SHORT, 1, '')
+GPS_POSITION = DataType(NumberType.FLOAT, 0.01, '°')
+SPEED = DataType(NumberType.SHORT, 0.1, 'km/h')
+ROLL_PITCH_DEGREE = DataType(NumberType.SHORT, 1, '°')
+HEADING = DataType(NumberType.UNSIGNED_SHORT, 1, 'sec')
+ABSOLUTTIME = DataType(NumberType.UNSIGNED_INT, 1, 'sec')
+POWER = DataType(NumberType.INT, 1, 'mW')
+ACCELERATION = DataType(NumberType.SHORT, 1, 'm/s^2')
+FLOW = DataType(NumberType.UNSIGNED_SHORT, 1, 'L\sec')
+DISTANCE = DataType(NumberType.SHORT, 1, 'mm')
+LEVEL = DataType(NumberType.UNSIGNED_SHORT, 1, '%')
+PERCENT = DataType(NumberType.SHORT, 0.1, '%')
+DEGREE = DataType(NumberType.SHORT, 0.1, '°')

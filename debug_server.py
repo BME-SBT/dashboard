@@ -5,32 +5,54 @@ import can
 import sys
 from data import data_types
 from can.message import Message
+from threading import Thread
+
+def send_message(arbitration_id, is_extended_id, value, data_type : data_types):
+        message = Message(arbitration_id = arbitration_id,
+                              is_extended_id = is_extended_id, data=data_type.to_raw(float(value)))
+        bus.send(message)
 
 if __name__ == "__main__":
     bus = None
     try:
-        bus = can.Bus('ws://localhost:54701/',
+        bus = can.Bus(
+            'ws://localhost:54701/',
                       bustype='remote',
                       bitrate=CAN_BITRATE)
 
         # do CAN things
-        rpm = data_types.RPM
-        value = 1
-        step = 1
-        while True:
-            message = Message(arbitration_id=1112,
-                              is_extended_id=False, data=rpm.to_raw(value))
-            bus.send(message)
+       
+        motor_temp = open("test_data/motor_temp.txt", 'r').readlines()
+        motor_rpm = open("test_data/motor_rpm.txt", 'r').readlines()
+        motor_controller_temp = open("test_data/motor_controller_temp.txt", 'r').readlines()
+        motor_power = open("test_data/motor_power.txt", 'r').readlines()
+        motor_controller_current = open("test_data/motor_controller_current.txt", 'r').readlines()
+        voltage = open("test_data/voltage.txt", 'r').readlines()
+        battery_current = open("test_data/battery_current.txt", 'r').readlines()
+        battery_temp = open("test_data/battery_temp.txt", 'r').readlines()
 
-            value += step
-            if value > 5000:
-                step = -1
-            elif value < 1:
-                step = 1
-            time.sleep(1/10)
+        i = 0
+        for j in motor_temp:
+            # idk??
+            send_message(562, False, motor_temp[i], data_types.TEMPERATURE)
+            send_message(1112, False, motor_rpm[i], data_types.RPM)
+            send_message(570, False, motor_controller_temp[i],data_types.TEMPERATURE)
+            send_message(666, False, motor_power[i],data_types.POWER)
+            send_message(650, False, motor_controller_current[i],data_types.CURRENT)
+            send_message(544, False, voltage[i],data_types.VOLTAGE)            
+            send_message(624, False, battery_current[i],data_types.CURRENT)
+            # ?
+            send_message(552, False, battery_temp[i],data_types.TEMPERATURE)
+
+            i+=1
+            time.sleep(0.1)
 
     except Exception as e:
         print(e)
         print(
             f"make sure that the server is running: python3 -m can_remote --interface=virtual --channel=0 --bitrate={int(CAN_BITRATE)}")
         raise e
+    
+
+
+

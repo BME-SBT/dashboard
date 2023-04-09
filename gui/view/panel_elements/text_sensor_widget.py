@@ -25,11 +25,11 @@ class TextSensorWidget(QWidget):
 
         sensor = SensorManager.get_sensor(sensor_id)
         if sensor:
-            sensor.set_valuechange_handler(
+            sensor.add_valuechange_handler(
                 lambda v, oldval: self.sensor_value_changed.emit(str(v)))
             self.sensor_value_changed.connect(
                 lambda s: self.value_label.setText(f"{s} {sensor.data_type.unit}"))
-            sensor.set_statechange_handler(self.sensor_state_changed)
+            sensor.add_statechange_handler(self.sensor_state_changed)
         else:
             self.value_label.setText('<invalid sensor>')
 
