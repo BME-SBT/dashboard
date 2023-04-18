@@ -7,7 +7,7 @@ from data import data_types
 from can.message import Message
 from threading import Thread
 
-def send_message(arbitration_id, is_extended_id, value, data_type : data_types):
+def send_message(arbitration_id, is_extended_id, value, data_type):
         message = Message(arbitration_id = arbitration_id,
                               is_extended_id = is_extended_id, data=data_type.to_raw(float(value)))
         bus.send(message)
