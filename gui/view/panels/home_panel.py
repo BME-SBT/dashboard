@@ -9,7 +9,7 @@ class HomePanel(AbstractPanel):
         #   - RPM - MotorRPMWidget
         #   - Sebesseg - GPSSpeedWidget
         #   - Akkufesz - BatteryVoltageWidget
-        #   - Motor telj - Motor...
+        #   - Motor telj - MotorPowerWidget
         #   - Motor ho - MotorTemperatureWidget
         #   - Akku ho - BatteryTemperatureWidget
         #   - Akku aram - BatteryCurrentWidget
