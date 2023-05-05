@@ -18,9 +18,8 @@ class AbstractPanelElement(QWidget):
         else:
             pass  # TODO (dani, mate) invalid sensor? abstract function?
 
-    def sensor_state_changed(self):
+    def sensor_state_changed(self, state, old_state):
         raise NotImplementedError('sensor_state_changed must be implemented!')
 
-    def sensor_value_changed(self):
+    def sensor_value_changed(self, value, old_value):
         raise NotImplementedError('sensor_value_changed must be implemented!')
-        # self.value_label.setText(f"{s} {sensor.data_type.unit}")
