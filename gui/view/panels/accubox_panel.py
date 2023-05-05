@@ -16,11 +16,11 @@ class AccuboxPanel(AbstractPanel):
         main_layout.setContentsMargins(0, 0, 0, 0)
 
         # Test counter
-        self.battery_temperature_widget = BatteryTemperatureWidget(1)
-        main_layout.addWidget(self.battery_temperature_widget, alignment=Qt.AlignmentFlag.AlignCenter)
-
-        self.battery_current_widget = BatteryCurrentWidget()
-        main_layout.addWidget(self.battery_current_widget)
+        # self.battery_temperature_widget = BatteryTemperatureWidget(1)
+        # main_layout.addWidget(self.battery_temperature_widget, alignment=Qt.AlignmentFlag.AlignCenter)
+        #
+        # self.battery_current_widget = BatteryCurrentWidget()
+        # main_layout.addWidget(self.battery_current_widget)
 
         self.rpm_widget = TextSensorWidget("Motor RPM", 1112)
         main_layout.addWidget(self.rpm_widget)
