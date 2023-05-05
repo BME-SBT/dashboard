@@ -21,15 +21,15 @@ class Sensor:
         self.last_updated = 0
         self.value = None
 
-        self.valuechange_handler = None
-        self.statechange_handler = None
+        self.valuechange_handlers = []
+        self.statechange_handlers = []
 
-    def set_valuechange_handler(self, callback):
-        self.valuechange_handler = callback
+    def add_valuechange_handler(self, callback):
+        self.valuechange_handlers.append(callback)
 
-    def set_statechange_handler(self, callback):
-        self.statechange_handler = callback
-
+    def add_statechange_handler(self, callback):
+        self.statechange_handlers.append(callback)
+    
     def add_data(self, data):
         value = self.data_type.get_value(data)
         self.last_updated = time.time()
@@ -40,15 +40,15 @@ class Sensor:
     def _set_value(self, value):
         oldval = self.value
         self.value = value
-        if self.valuechange_handler:
-            self.valuechange_handler(self.value, oldval)
+        for valuechange_handler in self.valuechange_handlers:
+            valuechange_handler(self.value, oldval)
 
     def _set_state(self, state: SensorState):
         if self.state != state:
             oldstate = self.state
             self.state = state
-            if self.statechange_handler:
-                self.statechange_handler(self.state, oldstate)
+            for statechange_handler in self.statechange_handlers:
+                statechange_handler(self.state, oldstate)
 
     def timer_tick(self):
         update_interval = 1 / self.update_frequency
