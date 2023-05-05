@@ -6,6 +6,7 @@ from PySide6.QtWidgets import QWidget, QVBoxLayout
 
 from gui.view.panels.abstract_panel import AbstractPanel
 from gui.view.panels.accubox_panel import AccuboxPanel
+from gui.view.panels.home_panel import HomePanel
 from gui.view.panels.motorbox_panel import MotorboxPanel
 from gui.view.panels.permanent_panel import PermanentPanel
 from gui.view.panels.solarbox_panel import SolarboxPanel
@@ -23,6 +24,7 @@ class CenterPanel(QWidget):
         # Panels
         self.panels: List[AbstractPanel] = [
             SolarboxPanel(),
+            HomePanel(),
             AccuboxPanel(),
             MotorboxPanel(),
         ]
