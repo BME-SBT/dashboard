@@ -1,4 +1,3 @@
-from PySide6.QtCore import Signal
 from PySide6.QtWidgets import QWidget
 
 from data.sensor_manager import SensorManager
@@ -17,7 +16,7 @@ class AbstractPanelElement(QWidget):
             self.sensor.add_valuechange_handler(self.sensor_value_changed)
             self.sensor.add_statechange_handler(self.sensor_state_changed)
         else:
-            self.invalid_sensor()
+            pass  # TODO (dani, mate) invalid sensor? abstract function?
 
     def sensor_state_changed(self):
         raise NotImplementedError('sensor_state_changed must be implemented!')
@@ -25,6 +24,3 @@ class AbstractPanelElement(QWidget):
     def sensor_value_changed(self):
         raise NotImplementedError('sensor_value_changed must be implemented!')
         # self.value_label.setText(f"{s} {sensor.data_type.unit}")
-
-    def invalid_sensor(self):
-        raise NotImplementedError('sensor_value_changed must be implemented!')
