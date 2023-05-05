@@ -17,7 +17,7 @@ class PermanentPanel(QWidget):
         main_layout = QHBoxLayout(self)
 
         # Panel elements
-        self.battery_temperature_widget = BatteryTemperatureWidget(1)
+        self.battery_temperature_widget = BatteryTemperatureWidget()
         self.battery_current_widget = BatteryCurrentWidget()
 
         main_layout.addWidget(self.battery_temperature_widget)
