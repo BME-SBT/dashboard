@@ -7,7 +7,7 @@ from gui.view.panel_elements.abstract_panel_elements.abstract_panel_element impo
 class GPSSpeedWidget(AbstractPanelElement):
     # TODO implement custom design
     def __init__(self):
-        super().__init__(title='GPS Speed', sensor_id=0b10110010100)
+        super().__init__(title='GPS\nSpeed', sensor_id=0b10110010100)
 
         # Create main layout
         main_layout = QVBoxLayout(self)

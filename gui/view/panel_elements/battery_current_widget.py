@@ -7,7 +7,7 @@ from gui.view.panel_elements.abstract_panel_elements.abstract_panel_element impo
 class BatteryCurrentWidget(AbstractPanelElement):
     # TODO implement custom design
     def __init__(self):
-        super().__init__(title='Battery Current', sensor_id=0b01001010000)
+        super().__init__(title='Battery\nCurrent', sensor_id=0b01001010000)
 
         # Create main layout
         main_layout = QVBoxLayout(self)

@@ -7,7 +7,7 @@ from gui.view.panel_elements.abstract_panel_elements.abstract_panel_element impo
 class MotorRPMWidget(AbstractPanelElement):
     # TODO implement custom design
     def __init__(self):
-        super().__init__(title='Motor RPM', sensor_id=0b00001010010)
+        super().__init__(title='Motor\nRPM', sensor_id=0b00001010010)
 
         # Create main layout
         main_layout = QVBoxLayout(self)
