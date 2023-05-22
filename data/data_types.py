@@ -9,6 +9,8 @@ class NumberType(Enum):
     UNSIGNED_INT = '>I'
     SHORT = '>h'
     UNSIGNED_SHORT = '>H'
+    CHAR = '>'
+    UNSIGNED_CHAR = '>'
 
 
 class DataType:
@@ -36,7 +38,7 @@ VOLTAGE = DataType(NumberType.SHORT, 0.01, 'V')
 SOC = DataType(NumberType.UNSIGNED_SHORT, 0.1, '%')
 THROTTLE_POSITION = DataType(NumberType.SHORT, 1, '%')
 SWITCH_POSITION = DataType(NumberType.UNSIGNED_SHORT, 1, '')
-GPS_POSITION = DataType(NumberType.FLOAT, 0.01, '°')
+GPS_POSITION = DataType(NumberType.FLOAT, 1, '°')
 SPEED = DataType(NumberType.SHORT, 0.1, 'km/h')
 ROLL_PITCH_DEGREE = DataType(NumberType.SHORT, 1, '°')
 HEADING = DataType(NumberType.UNSIGNED_SHORT, 1, 'sec')

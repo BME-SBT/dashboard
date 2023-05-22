@@ -1,8 +1,11 @@
 from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QWidget, QHBoxLayout
 
-from gui.view.panel_elements.battery_current_widget import BatteryCurrentWidget
-from gui.view.panel_elements.battery_temperature_widget import BatteryTemperatureWidget
+from gui.view.panel_elements.permanent_battery_current_widget import PermanentBatteryCurrentWidget
+from gui.view.panel_elements.permanent_battery_temperature_widget import PermanentBatteryTemperatureWidget
+from gui.view.panel_elements.permanent_battery_voltage_widget import PermanentBatteryVoltageWidget
+from gui.view.panel_elements.permanent_motor_rpm_widget import PermanentMotorRPMWidget
+from gui.view.panel_elements.permanent_motor_temperature_widget import PermanentMotorTemperatureWidget
 
 
 class PermanentPanel(QWidget):
@@ -17,8 +20,14 @@ class PermanentPanel(QWidget):
         main_layout = QHBoxLayout(self)
 
         # Panel elements
-        self.battery_temperature_widget = BatteryTemperatureWidget()
-        self.battery_current_widget = BatteryCurrentWidget()
+        self.permanent_battery_temperature_widget = PermanentBatteryTemperatureWidget()
+        self.permanent_battery_current_widget = PermanentBatteryCurrentWidget()
+        self.permanent_battery_voltage_widget = PermanentBatteryVoltageWidget()
+        self.permanent_motor_rpm_widget = PermanentMotorRPMWidget()
+        self.permanent_motor_temperature_widget = PermanentMotorTemperatureWidget()
 
-        main_layout.addWidget(self.battery_temperature_widget)
-        main_layout.addWidget(self.battery_current_widget)
+        main_layout.addWidget(self.permanent_motor_rpm_widget)
+        main_layout.addWidget(self.permanent_battery_voltage_widget)
+        main_layout.addWidget(self.permanent_battery_current_widget)
+        main_layout.addWidget(self.permanent_motor_temperature_widget)
+        main_layout.addWidget(self.permanent_battery_temperature_widget)

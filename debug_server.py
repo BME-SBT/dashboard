@@ -6,6 +6,7 @@ import sys
 from data import data_types
 from can.message import Message
 from threading import Thread
+from data.sensor_ids import SensorId
 
 def send_message(arbitration_id, is_extended_id, value, data_type):
         message = Message(arbitration_id = arbitration_id,
@@ -34,13 +35,13 @@ if __name__ == "__main__":
         i = 0
         for j in motor_temp:
             # idk??
-            send_message(562, False, motor_temp[i], data_types.TEMPERATURE)
-            send_message(1112, False, motor_rpm[i], data_types.RPM)
-            send_message(570, False, motor_controller_temp[i],data_types.TEMPERATURE)
-            send_message(666, False, motor_power[i],data_types.POWER)
-            send_message(650, False, motor_controller_current[i],data_types.CURRENT)
-            send_message(544, False, voltage[i],data_types.VOLTAGE)            
-            send_message(624, False, battery_current[i],data_types.CURRENT)
+            send_message(SensorId.MOTOR_TEMPERATURE, False, motor_temp[i], data_types.TEMPERATURE)
+            send_message(SensorId.MOTOR_RPM, False, motor_rpm[i], data_types.RPM)
+            send_message(SensorId.MOTOR_CONTROLLER_TEMPERATURE, False, motor_controller_temp[i],data_types.TEMPERATURE)
+            send_message(SensorId.MOTOR_POWER, False, motor_power[i],data_types.POWER)
+            send_message(SensorId.MOTOR_CONTROLLER_CURRENT, False, motor_controller_current[i],data_types.CURRENT)
+            send_message(SensorId.BATTERY_VOLTAGE, False, voltage[i],data_types.VOLTAGE)            
+            send_message(SensorId.BATTERY_CURRENT, False, battery_current[i],data_types.CURRENT)
             # ?
             send_message(552, False, battery_temp[i],data_types.TEMPERATURE)
 
