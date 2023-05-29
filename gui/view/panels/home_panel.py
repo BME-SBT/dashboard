@@ -37,12 +37,12 @@ class HomePanel(AbstractPanel):
 
         # Bottom Layout, indicators
         bottom_layout = QHBoxLayout()
-        bottom_layout.addStretch()
+        # bottom_layout.addStretch()
         bottom_layout.addWidget(MotorPowerWidget())
         bottom_layout.addWidget(MotorRPMWidget())
         bottom_layout.addWidget(GPSSpeedWidget())
         bottom_layout.addWidget(BatteryVoltageWidget())
-        bottom_layout.addStretch()
+        # bottom_layout.addStretch()
 
         # Add layouts to Middle Part layout
         middle_part_layout.addLayout(top_layout)

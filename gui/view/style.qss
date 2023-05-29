@@ -1,7 +1,7 @@
 * {
     color: #1b1b1c;
     font-weight: 600;
-    font-size: 25px;
+    font-size: 20px;
 }
 
 SideBarButton {
@@ -46,4 +46,14 @@ DashboardWindow {
 .TitleLabel {
     padding: 5px;
     color: #151521;
+}
+
+BarWidget {
+    font-weight: 300;
+    font-size: 15px;
+}
+
+MotorRPMWidget:: {
+    alignment: center;
+    text-align: center;
 }

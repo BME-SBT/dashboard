@@ -3,8 +3,7 @@ from PySide6.QtWidgets import QLabel, QVBoxLayout
 from data.sensor import SensorState
 from gui.view.panel_elements.abstract_panel_elements.abstract_panel_element import AbstractPanelElement
 from gui.view.panel_elements.bar_widget import BarWidget
-from PySide6.QtGui import QPainter, QColor
-
+from gui.view.colors import Colors
 
 class BatteryTemperatureWidget(AbstractPanelElement):
     # TODO implement custom design
@@ -21,7 +20,7 @@ class BatteryTemperatureWidget(AbstractPanelElement):
         # Panel value
         # self.value_label = QLabel('0')
         # main_layout.addWidget(self.value_label)
-        self.bar_widget = BarWidget(100, 200, [0, 20, 45, 70, 100], [QColor(200, 0, 0), QColor(255, 80, 0, 160), QColor(25, 0, 90, 200), QColor(200, 0, 0)], False)
+        self.bar_widget = BarWidget(60, 200, [0, 40, 65, 85], [Colors.GREEN, Colors.ORANGE, Colors.RED], self.sensor.data_type.unit, False)
         main_layout.addWidget(self.bar_widget)
 
     def sensor_state_changed(self, state, old_state):

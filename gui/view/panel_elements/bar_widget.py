@@ -3,10 +3,11 @@ from PySide6 import QtCore, QtGui, QtWidgets
 from PySide6.QtCore import Qt
 
 from gui.view.panel_elements.abstract_panel_elements.abstract_gauge_widget import AbstractGaugeWidget
+from gui.view.colors import Colors
 
 class BarWidget(AbstractGaugeWidget):
-    def __init__(self, height, width,  tresholds, colors, isVertical):
-        super().__init__(height, width,  tresholds, colors)
+    def __init__(self, height, width,  tresholds, colors, unit, isVertical ):
+        super().__init__(height, width,  tresholds, colors, unit)
 
         self.isVertical = isVertical
         self.padding = 10
@@ -35,13 +36,6 @@ class BarWidget(AbstractGaugeWidget):
             main_layout.addWidget(min_label)
             main_layout.addWidget(self.canvas_label)
             main_layout.addWidget(max_label)
-
-      
-
-   
-
-        
-
         
         self.draw_gauge()
  
@@ -67,9 +61,9 @@ class BarWidget(AbstractGaugeWidget):
             for i in range (0, len(self.tresholds) - 1):
                 y = self.normalize_value * (self.tresholds[i] - self.tresholds[0]) + self.padding - self.canvas_height
                 height = self.normalize_value * (self.tresholds[i + 1] - self.tresholds[i])
-                color = self.colors[i]
-                painter.drawRect(x, y, width, height)
-            #painter.fillRect(x, y, width, height, color)
+                color = self.colors[i].value
+                # painter.drawRect(x, y, width, height)
+                painter.fillRect(x, y, width, height, color)
 
         else:
             y = self.padding
@@ -78,8 +72,9 @@ class BarWidget(AbstractGaugeWidget):
             for i in range (0, len(self.tresholds) - 1):
                 x = self.normalize_value * (self.tresholds[i] - self.tresholds[0]) 
                 width = self.normalize_value * (self.tresholds[i + 1] - self.tresholds[i]) 
-                color = self.colors[i]
-                painter.drawRect(x, y, width, height)
+                color = self.colors[i].value
+                # painter.drawRect(x, y, width, height)
+                painter.fillRect(x, y, width, height, color)
         
         painter.end()
         self.canvas_label.setPixmap(canvas)
@@ -97,17 +92,17 @@ class BarWidget(AbstractGaugeWidget):
             y = self.normalize_value * self.value - self.canvas_height
             width = 50
             height = 5
-            # color = self.colors[i]
-            painter.drawRect(x, y, width, height)
-            # painter.fillRect(x, y, width, height, color)
+            color = Colors.BLACK.value
+            # painter.drawRect(x, y, width, height)
+            painter.fillRect(x, y, width, height, color)
         else:
             x = self.normalize_value * self.value
             y = 0
             width = 5
             height = 50
-            # color = self.colors[i]
-            painter.drawRect(x, y, width, height)
-            # painter.fillRect(x, y, width, height, color)
+            color = Colors.BLACK.value
+            # painter.drawRect(x, y, width, height)
+            painter.fillRect(x, y, width, height, color)
 
         
         
