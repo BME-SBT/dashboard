@@ -1,13 +1,13 @@
 from PySide6.QtWidgets import QVBoxLayout, QHBoxLayout
 
 from gui.view.panels.abstract_panel import AbstractPanel
-from gui.view.panel_elements.battery_current_widget import BatteryCurrentWidget
-from gui.view.panel_elements.motor_rpm_widget import MotorRPMWidget
-from gui.view.panel_elements.gps_speed_widget import GPSSpeedWidget
-from gui.view.panel_elements.battery_voltage_widget import BatteryVoltageWidget
-from gui.view.panel_elements.motor_power_widget import MotorPowerWidget
-from gui.view.panel_elements.battery_temperature_widget import BatteryTemperatureWidget
-from gui.view.panel_elements.motor_temperature_widget import MotorTemperatureWidget
+from gui.view.panel_elements.home_panel.battery_current_widget import BatteryCurrentWidget
+from gui.view.panel_elements.home_panel.motor_rpm_widget import MotorRPMWidget
+from gui.view.panel_elements.home_panel.gps_speed_widget import GPSSpeedWidget
+from gui.view.panel_elements.home_panel.battery_voltage_widget import BatteryVoltageWidget
+from gui.view.panel_elements.home_panel.motor_power_widget import MotorPowerWidget
+from gui.view.panel_elements.home_panel.battery_temperature_widget import BatteryTemperatureWidget
+from gui.view.panel_elements.home_panel.motor_temperature_widget import MotorTemperatureWidget
 
 
 class HomePanel(AbstractPanel):
@@ -31,9 +31,11 @@ class HomePanel(AbstractPanel):
 
         # Top Layout, temperatures
         top_layout = QHBoxLayout()
+        top_layout.addStretch()
         top_layout.addWidget(MotorTemperatureWidget())
         top_layout.addStretch()
         top_layout.addWidget(BatteryTemperatureWidget())
+        top_layout.addStretch()
 
         # Bottom Layout, indicators
         bottom_layout = QHBoxLayout()
@@ -45,8 +47,12 @@ class HomePanel(AbstractPanel):
         # bottom_layout.addStretch()
 
         # Add layouts to Middle Part layout
+        middle_part_layout.addStretch()
         middle_part_layout.addLayout(top_layout)
+        middle_part_layout.addStretch()
         middle_part_layout.addLayout(bottom_layout)
+        middle_part_layout.addStretch()
+        
 
         # Add layouts to Main layout
         main_layout.addWidget(BatteryCurrentWidget())

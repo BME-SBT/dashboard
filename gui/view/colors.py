@@ -10,3 +10,5 @@ class Colors(Enum):
     RED = QColor(255, 0, 0)
     BLUE = QColor(65, 220, 220)
     BLACK = QColor(0, 0, 0)
+    GREY = QColor(180, 180, 180)
+    WHITE = QColor(255, 255, 255)

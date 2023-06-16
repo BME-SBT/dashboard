@@ -1,5 +1,5 @@
 * {
-    color: #1b1b1c;
+    color: #ffffff;
     font-weight: 600;
     font-size: 20px;
 }
@@ -32,11 +32,13 @@ TopBar {
 }
 
 AbstractPanel {
-    background-color: #cecedb;
+    background-color: #000000;
 }
 
 PermanentPanel {
     background-color: #494c52;
+    margin: 0px;
+    padding: 0px;
 }
 
 DashboardWindow {
