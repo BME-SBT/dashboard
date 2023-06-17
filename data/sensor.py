@@ -3,7 +3,6 @@ from data.data_types import DataType
 from enum import Enum
 import time
 
-
 class SensorState(Enum):
     NO_DATA = 0,
     NORMAL = 1,
@@ -42,7 +41,6 @@ class Sensor:
         self.value = value
         for valuechange_handler in self.valuechange_handlers:
             valuechange_handler(self.value, oldval)
-
     def _set_state(self, state: SensorState):
         if self.state != state:
             oldstate = self.state

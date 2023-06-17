@@ -4,14 +4,15 @@ from PySide2.QtCore import Qt, QRect
 from PySide2.QtGui import QPainter, QColor, QPen, QFont
 from gui.view.colors import Colors
 from data.sensor import SensorState
-
+import sys
 
 from gui.view.panel_elements.abstract_panel_elements.abstract_gauge_widget import AbstractGaugeWidget
 
 class CircularGaugeWidget(AbstractGaugeWidget):
+    refresh = QtCore.Signal()
     def __init__(self, height, width,  tresholds, colors, unit, name):
         super().__init__(height, width,  tresholds, colors, unit, name)
-
+        
         self.padding = 15
         self.value = 70
         self.min_value = tresholds[0]
@@ -34,7 +35,7 @@ class CircularGaugeWidget(AbstractGaugeWidget):
         main_layout = QVBoxLayout(self)
         main_layout.addWidget(self.canvas_label)
         # main_layout.addWidget(self.canvas_pointer_label)
-        
+        self.refresh.connect(self.update)
         self.draw_gauge()
  
     def sensor_state_changed(self, state: SensorState):
@@ -44,14 +45,14 @@ class CircularGaugeWidget(AbstractGaugeWidget):
             self.text_color = Colors.GREY
         else:
             self.text_color = Colors.WHITE
-        self.update()
+        self.refresh.emit()
 
     def sensor_value_changed(self, value):
         if(value):
             self.value = value
-            self.update()
-    
+            self.refresh.emit()
     def draw_gauge(self):
+        #print("gauge redraw", file=sys.stderr)
         canvas = self.canvas_label.pixmap()
         canvas.fill(Qt.GlobalColor.transparent)
         painter = QtGui.QPainter(canvas)
