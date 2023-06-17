@@ -39,4 +39,4 @@ class MotorPowerWidget(AbstractPanelElement):
 
     def sensor_value_changed(self, value, old_value):
        # self.value_label.setText(f"{value} {self.sensor.data_type.unit}")
-       self.circular_gauge_widget.sensor_value_changed(value)
+       self.circular_gauge_widget.sensor_value_changed(value / 1000) # mW != W :D
