@@ -48,7 +48,7 @@ class CircularGaugeWidget(AbstractGaugeWidget):
         self.refresh.emit()
 
     def sensor_value_changed(self, value):
-        if(value):
+        if value is not None:
             self.value = value
             self.refresh.emit()
     def draw_gauge(self):
