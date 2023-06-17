@@ -180,12 +180,12 @@ class CANThread(QThread):
                            bustype='remote',
                            bitrate=CAN_BITRATE)
         else:
-            return can.Bus(interface='socketcan', channel='vcan0', bitrate=CAN_BITRATE)
+            return can.Bus(interface='socketcan', channel='can0', bitrate=CAN_BITRATE)
 
 
 def start_can_thread():
     LOGGER.info("starting CAN thread")
-    can_thread = CANThread(True)  # TODO: Replace with false for socketcan
+    can_thread = CANThread(False)  # TODO: Replace with false for socketcan
     can_thread.finished.connect(can_thread.deleteLater)
     can_thread.start()
     return can_thread
