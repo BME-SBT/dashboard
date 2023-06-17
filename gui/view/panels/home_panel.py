@@ -1,4 +1,4 @@
-from PySide6.QtWidgets import QVBoxLayout, QHBoxLayout
+from PySide2.QtWidgets import QVBoxLayout, QHBoxLayout
 
 from gui.view.panels.abstract_panel import AbstractPanel
 from gui.view.panel_elements.home_panel.battery_current_widget import BatteryCurrentWidget

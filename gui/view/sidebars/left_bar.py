@@ -1,4 +1,4 @@
-from PySide6.QtCore import Signal
+from PySide2.QtCore import Signal
 
 from gui.view.sidebars.side_bar import SideBar
 

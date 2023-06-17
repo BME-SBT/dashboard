@@ -1,4 +1,4 @@
-from PySide6.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout
+from PySide2.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout
 
 from gui.view.center_panel import CenterPanel, PanelSwitchDirection
 from gui.view.sidebars.left_bar import LeftBar

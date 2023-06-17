@@ -1,5 +1,5 @@
-from PySide6.QtCore import Qt
-from PySide6.QtWidgets import QWidget, QHBoxLayout
+from PySide2.QtCore import Qt
+from PySide2.QtWidgets import QWidget, QHBoxLayout
 
 from gui.view.panel_elements.permanent_panel.permanent_battery_current_widget import PermanentBatteryCurrentWidget
 from gui.view.panel_elements.permanent_panel.permanent_battery_temperature_widget import PermanentBatteryTemperatureWidget

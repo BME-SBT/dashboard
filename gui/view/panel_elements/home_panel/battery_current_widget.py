@@ -1,4 +1,4 @@
-from PySide6.QtWidgets import QLabel, QVBoxLayout, QWidget
+from PySide2.QtWidgets import QLabel, QVBoxLayout, QWidget
 
 
 from gui.view.colors import Colors

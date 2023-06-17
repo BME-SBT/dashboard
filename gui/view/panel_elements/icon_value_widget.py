@@ -1,4 +1,4 @@
-from PySide6.QtWidgets import QLabel, QHBoxLayout, QWidget
+from PySide2.QtWidgets import QLabel, QHBoxLayout, QWidget
 
 from data.sensor import SensorState
 from gui.view.panel_elements.abstract_panel_elements.abstract_panel_element import AbstractPanelElement

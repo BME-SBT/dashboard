@@ -2,8 +2,8 @@ import logging
 import sys
 import time
 
-from PySide6.QtWidgets import QApplication
-from PySide6.QtCore import QThread
+from PySide2.QtWidgets import QApplication
+from PySide2.QtCore import QThread
 import can
 from can.interfaces import udp_multicast
 import data.data_types
@@ -152,7 +152,7 @@ def start_gui(can_thread, lcm_thread):
     dashboard.init_stylesheet()
     dashboard.show()
 
-    sys.exit(app.exec())
+    sys.exit(app.exec_())
 
 
 class CANThread(QThread):

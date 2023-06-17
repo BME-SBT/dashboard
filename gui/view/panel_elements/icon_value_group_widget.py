@@ -1,5 +1,5 @@
-from PySide6.QtCore import Qt
-from PySide6.QtWidgets import QVBoxLayout, QLabel
+from PySide2.QtCore import Qt
+from PySide2.QtWidgets import QVBoxLayout, QLabel
 
 from gui.view.panel_elements.home_panel.battery_current_widget import BatteryCurrentWidget
 from gui.view.panel_elements.home_panel.battery_temperature_widget import BatteryTemperatureWidget

@@ -1,5 +1,5 @@
-from PySide6.QtWidgets import QVBoxLayout, QLabel
-from PySide6.QtGui import QPainter, QColor
+from PySide2.QtWidgets import QVBoxLayout, QLabel
+from PySide2.QtGui import QPainter, QColor
 
 
 from data.sensor import SensorState

@@ -1,7 +1,7 @@
-from PySide6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QLabel
-from PySide6 import QtCore, QtGui, QtWidgets
-from PySide6.QtCore import Qt, QRect
-from PySide6.QtGui import QPainter, QColor, QPen, QFont
+from PySide2.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QLabel
+from PySide2 import QtCore, QtGui, QtWidgets
+from PySide2.QtCore import Qt, QRect
+from PySide2.QtGui import QPainter, QColor, QPen, QFont
 import math
 
 from gui.view.panel_elements.abstract_panel_elements.abstract_gauge_widget import AbstractGaugeWidget

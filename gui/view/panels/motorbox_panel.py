@@ -1,4 +1,4 @@
-from PySide6.QtWidgets import QVBoxLayout, QLabel
+from PySide2.QtWidgets import QVBoxLayout, QLabel
 
 from gui.view.panels.abstract_panel import AbstractPanel
 

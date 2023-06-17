@@ -1,6 +1,6 @@
-from PySide6.QtGui import QShortcut, QKeySequence
-from PySide6.QtWidgets import QMainWindow, QApplication
-from PySide6.QtCore import Qt
+from PySide2.QtGui import QKeySequence
+from PySide2.QtWidgets import QShortcut, QMainWindow, QApplication
+from PySide2.QtCore import Qt
 
 from gui.view.main_container import MainContainer
 

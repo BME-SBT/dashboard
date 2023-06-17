@@ -1,5 +1,5 @@
-from PySide6.QtWidgets import QLabel, QVBoxLayout, QWidget
-from PySide6.QtCore import Signal
+from PySide2.QtWidgets import QLabel, QVBoxLayout, QWidget
+from PySide2.QtCore import Signal
 from data.sensor import SensorState
 
 from data.sensor_manager import SensorManager

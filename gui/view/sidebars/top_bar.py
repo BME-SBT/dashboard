@@ -1,5 +1,5 @@
-from PySide6.QtCore import Qt
-from PySide6.QtWidgets import QWidget
+from PySide2.QtCore import Qt
+from PySide2.QtWidgets import QWidget
 
 
 class TopBar(QWidget):

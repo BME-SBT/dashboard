@@ -1,5 +1,5 @@
 from enum import Enum
-from PySide6.QtGui import QColor
+from PySide2.QtGui import QColor
 
 
 class Colors(Enum):

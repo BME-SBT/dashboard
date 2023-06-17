@@ -1,4 +1,4 @@
-from PySide6.QtWidgets import QWidget, QVBoxLayout, QLabel
+from PySide2.QtWidgets import QWidget, QVBoxLayout, QLabel
 
 
 class ErrorPopup(QWidget):

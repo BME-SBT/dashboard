@@ -1,8 +1,8 @@
 from enum import Enum
 from typing import List
 
-from PySide6.QtCore import Qt
-from PySide6.QtWidgets import QWidget, QVBoxLayout
+from PySide2.QtCore import Qt
+from PySide2.QtWidgets import QWidget, QVBoxLayout
 
 from gui.view.panels.abstract_panel import AbstractPanel
 from gui.view.panels.accubox_panel import AccuboxPanel
