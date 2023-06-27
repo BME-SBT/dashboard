@@ -33,6 +33,7 @@ class Sensor:
         value = self.data_type.get_value(data)
         self.last_updated = time.time()
         self._set_state(SensorState.NORMAL)
+        # print("state changed")
 
         self._set_value(value)
 

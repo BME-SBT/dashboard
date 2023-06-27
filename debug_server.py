@@ -38,10 +38,12 @@ if __name__ == "__main__":
             send_message(SensorId.MOTOR_TEMPERATURE.value, False, motor_temp[i], data_types.TEMPERATURE)
             send_message(SensorId.MOTOR_RPM.value, False, motor_rpm[i], data_types.RPM)
             send_message(SensorId.MOTOR_CONTROLLER_TEMPERATURE.value, False, motor_controller_temp[i], data_types.TEMPERATURE)
-            send_message(SensorId.MOTOR_POWER.value, False, motor_power[i], data_types.POWER)
+            if(i < 20):
+                send_message(SensorId.MOTOR_POWER.value, False, motor_power[i], data_types.POWER)
             send_message(SensorId.MOTOR_CONTROLLER_CURRENT.value, False, motor_controller_current[i], data_types.CURRENT)
             send_message(SensorId.BATTERY_VOLTAGE.value, False, voltage[i], data_types.VOLTAGE)            
             send_message(SensorId.BATTERY_CURRENT.value, False, battery_current[i], data_types.CURRENT)
+            send_message(SensorId.BATTERY_TEMPERATURE_1_2_3.value, False, battery_current[i], data_types.CURRENT)
             # ?
             # send_message(552, False, battery_temp[i],data_types.TEMPERATURE)
 

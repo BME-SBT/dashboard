@@ -1,4 +1,4 @@
-from PySide2.QtWidgets import QLabel, QVBoxLayout, QWidget
+from PySide2.QtWidgets import QLabel, QHBoxLayout, QWidget
 from PySide2.QtCore import Signal
 from data.sensor import SensorState
 
@@ -13,15 +13,16 @@ class TextSensorWidget(QWidget):
         super().__init__()
 
         # Create main layout
-        main_layout = QVBoxLayout(self)
+        main_layout = QHBoxLayout(self)
 
         # Panel name
-        name_label = QLabel(title)
+        name_label = QLabel(title + ': ')
         main_layout.addWidget(name_label)
 
         # Panel value
-        self.value_label = QLabel('N/A')
+        self.value_label = QLabel('-')
         main_layout.addWidget(self.value_label)
+        main_layout.addStretch()
 
         sensor = SensorManager.get_sensor(sensor_id)
         if sensor:
@@ -38,4 +39,4 @@ class TextSensorWidget(QWidget):
             self.value_label.setStyleSheet("color: red")
             self.value_label.setText(self.value_label.text() + " - NO DATA")
         else:
-            self.value_label.setStyleSheet("color: black")
+            self.value_label.setStyleSheet("color: white")

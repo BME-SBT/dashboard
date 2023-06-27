@@ -5,16 +5,17 @@ from data.sensor import SensorState
 from gui.view.panel_elements.abstract_panel_elements.abstract_panel_element import AbstractPanelElement
 from gui.view.panel_elements.circular_gauge_widget import CircularGaugeWidget
 from gui.view.colors import Colors
+from data.sensor_ids import SensorId
 
 
 class PermanentBatteryCurrentWidget(AbstractPanelElement):
     # TODO implement custom design
     def __init__(self):
-        super().__init__(title='Battery\nCurrent', sensor_id=0b01001010000)
+        super().__init__(title='CUR', sensor_id=SensorId.BATTERY_CURRENT.value)
 
         # Create main layout
         main_layout = QVBoxLayout(self)
-        self.setContentsMargins(0, 0, 0, 0)
+        # self.setContentsMargins(0, 0, 0, 0)
         main_layout.setContentsMargins(0, 0, 0, 0)
 
         # Panel name
@@ -24,7 +25,7 @@ class PermanentBatteryCurrentWidget(AbstractPanelElement):
         # Panel value
         self.value_label = QLabel('0')
         # main_layout.addWidget(self.value_label)
-        self.circular_gauge_widget = CircularGaugeWidget(100, 100, [-35, 0, 50, 150, 200], [Colors.BLUE, Colors.GREEN, Colors.ORANGE, Colors.RED], self.sensor.data_type.unit, 'Bat. Current')
+        self.circular_gauge_widget = CircularGaugeWidget(100, 100, [-35, 0, 50, 150, 200], [Colors.BLUE, Colors.GREEN, Colors.ORANGE, Colors.RED], self.sensor.data_type.unit, self.title)
         main_layout.addWidget(self.circular_gauge_widget)
 
     def sensor_state_changed(self, state, old_state):

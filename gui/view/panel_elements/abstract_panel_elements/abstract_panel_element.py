@@ -10,6 +10,8 @@ class AbstractPanelElement(QWidget):
         self.title = title
         self.sensor_id = sensor_id
 
+        self.setContentsMargins(0, 0, 0, 0)
+
         # Connect sensor
         self.sensor = SensorManager.get_sensor(sensor_id)
         if self.sensor:

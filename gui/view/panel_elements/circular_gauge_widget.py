@@ -14,7 +14,6 @@ class CircularGaugeWidget(AbstractGaugeWidget):
         super().__init__(height, width,  tresholds, colors, unit, name)
         
         self.padding = 15
-        self.value = 70
         self.min_value = tresholds[0]
         self.max_value = tresholds[-1]
         self.text_color = Colors.WHITE
@@ -27,6 +26,7 @@ class CircularGaugeWidget(AbstractGaugeWidget):
         canvas = QtGui.QPixmap(self.canvas_width, self.canvas_height)
         canvas.fill(Qt.GlobalColor.transparent)
         self.canvas_label.setPixmap(canvas)
+        self.canvas_label.setContentsMargins(0, 0, 0, 0)
         # self.canvas_pointer_label = QtWidgets.QLabel()
         # canvas = QtGui.QPixmap(self.canvas_width, self.canvas_height)
         # canvas.fill(Qt.GlobalColor.transparent)
@@ -41,16 +41,20 @@ class CircularGaugeWidget(AbstractGaugeWidget):
     def sensor_state_changed(self, state: SensorState):
         if(state == SensorState.MISSING_DATA):
             self.text_color = Colors.RED
+            self.colors = self.red_colors
         elif(state == SensorState.NO_DATA):
-            self.text_color = Colors.GREY
+            self.text_color = Colors.LIGHT_GREY
+            self.colors = self.gray_colors
         else:
             self.text_color = Colors.WHITE
+            self.colors = self.normal_colors
         self.refresh.emit()
 
     def sensor_value_changed(self, value):
         if value is not None:
             self.value = value
             self.refresh.emit()
+
     def draw_gauge(self):
         #print("gauge redraw", file=sys.stderr)
         canvas = self.canvas_label.pixmap()
@@ -72,7 +76,7 @@ class CircularGaugeWidget(AbstractGaugeWidget):
         for i in range (0, len(self.tresholds) - 1):
             arc_start = 16 * ((self.tresholds[i] - self.tresholds[0]) * self.normalize_value + strat_arc)
             arc_span = - 16 * (self.tresholds[i + 1] - self.tresholds[i]) * self.normalize_value
-            pen.setColor(self.normal_colors[i].value)
+            pen.setColor(self.colors[i])
             painter.setPen(pen)
             painter.drawArc(QRect(x, y, width, height), -arc_start, arc_span)
         pen = QtGui.QPen(self.text_color.value)
@@ -81,11 +85,13 @@ class CircularGaugeWidget(AbstractGaugeWidget):
         painter.drawText(QRect(x/2, y, self.canvas_width - self.padding, self.canvas_height *0.8), Qt.AlignLeft|Qt.AlignBottom, str(self.tresholds[0]))
         painter.drawText(QRect(x/2, y, self.canvas_width - self.padding, self.canvas_height * 0.8), Qt.AlignRight|Qt.AlignBottom, str(self.tresholds[-1]))
         painter.setFont(QFont('Arial', 8))
-        painter.drawText(QRect(0, y, self.canvas_width, self.canvas_height- 2 * self.padding), Qt.AlignHCenter|Qt.AlignBottom, self.name)
+        painter.drawText(QRect(0, y, self.canvas_width, self.canvas_height- 2 * self.padding), Qt.AlignHCenter|Qt.AlignBottom, self.title)
         self.canvas_label.setPixmap(canvas)
         painter.end()
 
     def draw_pointer(self, value):
+        if self.value is None:
+            return
         canvas = self.canvas_label.pixmap()
         # canvas = QtGui.QPixmap(self.canvas_width, self.canvas_height)
         painter = QtGui.QPainter(canvas)
@@ -95,6 +101,7 @@ class CircularGaugeWidget(AbstractGaugeWidget):
         # qp.drawText(event.rect(), Qt.Alignment.AlignCenter, "szoveg")
         # qp.end()
         pointer_value = self.value
+        text_value = round(self.value)
         if(self.value < self.min_value):
             pointer_value = self.min_value
         if(self.value > self.max_value):
@@ -122,14 +129,12 @@ class CircularGaugeWidget(AbstractGaugeWidget):
         painter.drawArc(QRect(x, y, width, height), -arc_start, arc_span)  
 
         painter.setFont(QFont('Arial', self.canvas_height / 5))
-        painter.drawText(QRect(0,0,self.canvas_width,self.canvas_height), Qt.AlignCenter, str(self.value))
+        painter.drawText(QRect(0,0,self.canvas_width,self.canvas_height), Qt.AlignCenter, str(text_value))
         painter.drawPixmap(QtCore.QPoint(), canvas)
         painter.end()
 
         # self.canvas_label.clear()   
         self.canvas_label.setPixmap(canvas)   
-
-               
 
     def paintEvent(self, event):
        self.draw_gauge()
