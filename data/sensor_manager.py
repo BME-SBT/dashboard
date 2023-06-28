@@ -39,3 +39,7 @@ class SensorManager:
     def lcm_tick(cls):
         for sensor in cls.sensors.values():
             sensor.timer_tick()
+
+    @classmethod
+    def get_sensors(cls):
+        return cls.sensors
