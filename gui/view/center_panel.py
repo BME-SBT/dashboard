@@ -23,12 +23,12 @@ class CenterPanel(QWidget):
 
         # Panels
         self.panels: List[AbstractPanel] = [
-            SolarboxPanel(),
+#            SolarboxPanel(),
             HomePanel(),
-            AccuboxPanel(),
-            MotorboxPanel(),
+#            AccuboxPanel(),
+#            MotorboxPanel(),
         ]
-        self.current_panel_idx = 1
+        self.current_panel_idx = 0
 
         # Fix panel
         self.fix_panel = PermanentPanel()

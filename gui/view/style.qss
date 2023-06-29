@@ -28,7 +28,7 @@ SideBar {
 }
 
 TopBar {
-    background-color: #3a3d42;
+    background-color: #5f5f5f;
 }
 
 AbstractPanel {
