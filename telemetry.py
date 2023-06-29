@@ -1,7 +1,13 @@
+import copy
 import logging
+import multiprocessing
 import sys
+import time
+from multiprocessing import Manager
 
 import can as can
+from influxdb_client import InfluxDBClient, Point
+from influxdb_client.client.write_api import SYNCHRONOUS, ASYNCHRONOUS
 
 import data
 import data.data_types
@@ -145,6 +151,10 @@ def build_sensor_array():
 
 def start_can_listening():
     LOGGER.info("CAN thread started")
+
+    for sensor in SensorManager.get_sensors():
+        sensor.add_valuechange_handler(lambda v, name: upload_messages(v,name))
+
     while True:
         try:
             with create_bus() as bus:
@@ -154,16 +164,29 @@ def start_can_listening():
         except Exception as e:
             print(e)
             LOGGER.warning('restarting bus after timeout')
+            time.sleep(1)
 
 
-def create_bus(self):
+def create_bus():
     return can.Bus(interface='socketcan', channel='can0', bitrate=CAN_BITRATE)
+
+
+bucket_name = "lana_data"
+client = InfluxDBClient(url="http://influx.solarboatteam.hu:8086",
+                        token="8WjcfKiq7otthk5XjhFokcI8Ll37ni_GyGBJ4KjYZt2LE34NDsfm_wRqdBKnexFcYSXkk2d28Xr2p0PZk-1quA==",
+                        org="sbt")
+write_api = client.write_api(write_options=ASYNCHRONOUS)
+
+
+def upload_messages(val, name):
+    p = Point("data").field(name, val)
+    write_api.write(bucket=bucket_name, record=p)
 
 
 def main():
     build_sensor_array()
-    for sensor in SensorManager.get_sensors():
-        sensor.add_valuechange_handler(lambda v, ov: print(f"{sensor.name}: {v}"))
+
+
     start_can_listening()
 
 

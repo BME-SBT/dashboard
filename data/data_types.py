@@ -20,7 +20,7 @@ class DataType:
         self.unit = unit
 
     def get_value(self, data):
-        return struct.unpack(self.number_type.value, data)[0] / self.resolution
+        return struct.unpack(self.number_type.value, data)[0] * self.resolution
 
     def get_text_value(self, data):
         val = self.get_value(data)
@@ -34,7 +34,7 @@ RPM = DataType(NumberType.SHORT, 1, '1/min')
 TEMPERATURE = DataType(NumberType.SHORT, 0.1, '°C')
 CURRENT = DataType(NumberType.SHORT, 0.1, 'A')
 MCURRENT = DataType(NumberType.SHORT, 1, 'mA')
-VOLTAGE = DataType(NumberType.SHORT, 0.01, 'V')
+VOLTAGE = DataType(NumberType.SHORT, 0.1, 'V')
 SOC = DataType(NumberType.UNSIGNED_SHORT, 0.1, '%')
 THROTTLE_POSITION = DataType(NumberType.SHORT, 1, '%')
 SWITCH_POSITION = DataType(NumberType.UNSIGNED_SHORT, 1, '')

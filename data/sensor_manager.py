@@ -15,6 +15,7 @@ class SensorManager:
     def receive_message(cls, message: Message):
         # data = self.sensors[sensor_id].add_data(message)
         message_id, data = message.arbitration_id, message.data
+        #print(f"raw: {hex(message_id)}: {data}")
         if message_id in cls.sensors.keys():
             sensor: Sensor = cls.sensors[message_id]
             sensor.add_data(data)
@@ -42,4 +43,4 @@ class SensorManager:
 
     @classmethod
     def get_sensors(cls):
-        return cls.sensors
+        return cls.sensors.values()
