@@ -22,7 +22,7 @@ class WarnImage(QLabel):
         self.state_validator = state_validator
         self.value_validator = value_validator
 
-        SensorManager.get_sensor(id).add_statechange_handler(lambda v, ov: self.state_chaned(v, ov))
+        SensorManager.get_sensor(id).add_statechange_handler(lambda v, ov: self.state_changed(v, ov))
         SensorManager.get_sensor(id).add_valuechange_handler(lambda v, name: self.value_changed(v, name))
 
     def state_changed(self, v, ov):

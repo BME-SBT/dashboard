@@ -2,6 +2,7 @@ from PySide2.QtCore import Qt
 from PySide2.QtWidgets import QWidget, QHBoxLayout
 
 from data.sensor import SensorState
+from gui.view.panel_elements.heartbeat_image import HeartbeatImage
 from gui.view.panel_elements.warn_image import WarnImage
 
 
@@ -27,7 +28,7 @@ class TopBar(QWidget):
         self.battery_temp_warn = WarnImage(0b00010010000, "battery_temp_warn", lambda v,name: v >= 50.0)
 
         self.motor_on_ok = WarnImage(0b00001010010, "motor_on", lambda v,name: True, lambda s, os: s == SensorState.NORMAL, True)
-
+        self.heartbeat = HeartbeatImage()
 
         main_layout.addSpacing(10)
 
@@ -41,4 +42,5 @@ class TopBar(QWidget):
 
         main_layout.addStretch()
         main_layout.addWidget(self.motor_on_ok)
+        main_layout.addWidget(self.heartbeat)
         main_layout.addSpacing(10)
