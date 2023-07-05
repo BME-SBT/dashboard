@@ -28,8 +28,15 @@ class PermanentPanel(QWidget):
         self.permanent_motor_rpm_widget = PermanentMotorRPMWidget()
         self.permanent_motor_temperature_widget = PermanentMotorTemperatureWidget()
 
+        main_layout.addStretch()
         main_layout.addWidget(self.permanent_motor_rpm_widget)
+        main_layout.addStretch()
         main_layout.addWidget(self.permanent_battery_voltage_widget)
+        main_layout.addStretch()
         main_layout.addWidget(self.permanent_battery_current_widget)
+        main_layout.addStretch()
         main_layout.addWidget(self.permanent_motor_temperature_widget)
+        main_layout.addStretch()
         main_layout.addWidget(self.permanent_battery_temperature_widget)
+        main_layout.addStretch()
+

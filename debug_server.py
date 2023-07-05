@@ -8,21 +8,23 @@ from can.message import Message
 from threading import Thread
 from data.sensor_ids import SensorId
 
+
 def send_message(arbitration_id, is_extended_id, value, data_type):
-        message = Message( arbitration_id = arbitration_id,
-                              is_extended_id = is_extended_id, data=data_type.to_raw(float(value)))
-        bus.send(msg=message)
+    message = Message(arbitration_id=arbitration_id,
+                      is_extended_id=is_extended_id, data=data_type.to_raw(float(value)))
+    bus.send(msg=message)
+
 
 if __name__ == "__main__":
     bus = None
     try:
         bus = can.Bus(
             'ws://localhost:54701/',
-                      bustype='remote',
-                      bitrate=CAN_BITRATE)
+            bustype='remote',
+            bitrate=CAN_BITRATE)
 
         # do CAN things
-       
+
         motor_temp = open("test_data/motor_temp.txt", 'r').readlines()
         motor_rpm = open("test_data/motor_rpm.txt", 'r').readlines()
         motor_controller_temp = open("test_data/motor_controller_temp.txt", 'r').readlines()
@@ -33,29 +35,31 @@ if __name__ == "__main__":
         battery_temp = open("test_data/battery_temp.txt", 'r').readlines()
 
         i = 0
-        for j in motor_temp:
+        for j in range(0, len(motor_temp)):
             # idk??
-            send_message(SensorId.MOTOR_TEMPERATURE.value, False, motor_temp[i], data_types.TEMPERATURE)
-            send_message(SensorId.MOTOR_RPM.value, False, motor_rpm[i], data_types.RPM)
-            send_message(SensorId.MOTOR_CONTROLLER_TEMPERATURE.value, False, motor_controller_temp[i], data_types.TEMPERATURE)
-            if(i < 20):
-                send_message(SensorId.MOTOR_POWER.value, False, motor_power[i], data_types.POWER)
-            send_message(SensorId.MOTOR_CONTROLLER_CURRENT.value, False, motor_controller_current[i], data_types.CURRENT)
-            send_message(SensorId.BATTERY_VOLTAGE.value, False, voltage[i], data_types.VOLTAGE)            
-            send_message(SensorId.BATTERY_CURRENT.value, False, battery_current[i], data_types.CURRENT)
-            send_message(SensorId.BATTERY_TEMPERATURE_1_2_3.value, False, battery_current[i], data_types.CURRENT)
+            #send_message(SensorId.MOTOR_TEMPERATURE.value, False, motor_temp[i], data_types.TEMPERATURE)
+            #send_message(SensorId.MOTOR_RPM.value, False, motor_rpm[i], data_types.RPM)
+            #send_message(SensorId.MOTOR_CONTROLLER_TEMPERATURE.value, False, motor_controller_temp[i],
+            #             data_types.TEMPERATURE)
+
+            send_message(SensorId.MOTOR_POWER.value, False, motor_power[i], data_types.POWER)
+            send_message(SensorId.HIGHEST_CELL_VOLTAGE.value, False, 3000, data_types.VOLTAGE_MV)
+            send_message(SensorId.LOWEST_CELL_VOLTAGE.value, False, 4200, data_types.VOLTAGE_MV)
+
+
+            #send_message(SensorId.MOTOR_CONTROLLER_CURRENT.value, False, motor_controller_current[i],
+            #             data_types.CURRENT)
+            #send_message(SensorId.BATTERY_VOLTAGE.value, False, voltage[i], data_types.VOLTAGE)
+            #send_message(SensorId.BATTERY_CURRENT.value, False, battery_current[i], data_types.CURRENT)
+            #send_message(SensorId.BATTERY_TEMPERATURE_1_2_3.value, False, battery_current[i], data_types.CURRENT)
             # ?
             # send_message(552, False, battery_temp[i],data_types.TEMPERATURE)
 
-            i+=1
-            time.sleep(0.1)
+            i += 1
+            time.sleep(0.5)
 
     except Exception as e:
         print(e)
         print(
             f"make sure that the server is running: python3 -m can_remote --interface=virtual --channel=0 --bitrate={int(CAN_BITRATE)}")
         raise e
-    
-
-
-

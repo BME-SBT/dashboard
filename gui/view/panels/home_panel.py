@@ -10,6 +10,8 @@ from gui.view.panel_elements.home_panel.motor_temperature_widget import MotorTem
 from gui.view.panel_elements.home_panel.throttle_position_widget import ThrottlePositionWidget
 from gui.view.panel_elements.home_panel.battery_temperature_text_widget import BatteryTemperatureWidget
 from gui.view.panel_elements.home_panel.motor_controller_temperature import MotorControllerTemperatureWidget
+from gui.view.panel_elements.home_panel.lowest_cell_voltage_text_widget import LowestCellVoltageTextWidget
+from gui.view.panel_elements.home_panel.highest_cell_voltage_text_widget import HighestCellVoltageTextWidget
 
 
 
@@ -66,8 +68,19 @@ class HomePanel(AbstractPanel):
         # middle_part_layout.addStretch()
         middle_part_layout.addLayout(top_layout)
         middle_part_layout.addStretch()
-        middle_part_layout.addWidget(BatteryTemperatureWidget())
-        middle_part_layout.addStretch()
+
+        text_layout = QHBoxLayout()
+        text_layout.setContentsMargins(0, 0, 0, 0)
+
+        text_layout.addStretch()
+        text_layout.addWidget(BatteryTemperatureWidget())
+        text_layout.addStretch()
+        text_layout.addWidget(HighestCellVoltageTextWidget())
+        text_layout.addStretch()
+        text_layout.addWidget(LowestCellVoltageTextWidget())
+        text_layout.addStretch()
+
+        middle_part_layout.addLayout(text_layout)
         middle_part_layout.addLayout(bottom_layout)
         middle_part_layout.addStretch()
         

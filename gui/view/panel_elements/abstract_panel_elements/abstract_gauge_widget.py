@@ -5,7 +5,7 @@ from data.sensor import SensorState
 
 
 class AbstractGaugeWidget(QWidget):
-    def __init__(self, height, width, tresholds, colors, unit, title):
+    def __init__(self, height, width, tresholds, colors, unit, title, rounding):
         super().__init__()
         self.tresholds = tresholds
         self.normal_colors = []
@@ -23,6 +23,7 @@ class AbstractGaugeWidget(QWidget):
         self.text_color = Colors.LIGHT_GREY
         self.state =  SensorState.NO_DATA
         self.value = None
+        self.rounding = rounding
 
         
         self.setContentsMargins(0, 0, 0, 0)

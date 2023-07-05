@@ -18,7 +18,7 @@ class BatteryCurrentWidget(AbstractPanelElement):
         main_layout.setContentsMargins(0, 0, 0, 0)
 
         # Panel value
-        self.bar_widget = BarWidget(250, 70, [-35, 0, 50, 150, 200], [Colors.BLUE, Colors.GREEN, Colors.ORANGE, Colors.RED], self.sensor.data_type.unit, self.title, True)
+        self.bar_widget = BarWidget(250, 70, [-35, 0, 50, 150, 200], [Colors.BLUE, Colors.GREEN, Colors.ORANGE, Colors.RED], self.sensor.data_type.unit, self.title, True, 1)
         main_layout.addWidget(self.bar_widget)
 
     def sensor_state_changed(self, state, old_state):

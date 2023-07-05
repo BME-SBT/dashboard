@@ -25,7 +25,7 @@ class PermanentBatteryCurrentWidget(AbstractPanelElement):
         # Panel value
         self.value_label = QLabel('0')
         # main_layout.addWidget(self.value_label)
-        self.circular_gauge_widget = CircularGaugeWidget(100, 100, [-35, 0, 50, 150, 200], [Colors.BLUE, Colors.GREEN, Colors.ORANGE, Colors.RED], self.sensor.data_type.unit, self.title)
+        self.circular_gauge_widget = CircularGaugeWidget(100, 100, [-35, 0, 50, 150, 200], [Colors.BLUE, Colors.GREEN, Colors.ORANGE, Colors.RED], self.sensor.data_type.unit, self.title, 1)
         main_layout.addWidget(self.circular_gauge_widget)
 
     def sensor_state_changed(self, state, old_state):

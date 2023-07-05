@@ -16,7 +16,7 @@ class PermanentMotorRPMWidget(AbstractPanelElement):
         main_layout.setContentsMargins(0, 0, 0, 0)
 
         # Panel value
-        self.circular_gauge_widget = CircularGaugeWidget(100, 100, [-1000, 0, 1000, 3500, 5000, 6000], [Colors.BLUE, Colors.GREEN, Colors.LIGHT_GREEN, Colors.ORANGE, Colors.RED], self.sensor.data_type.unit, self.title)
+        self.circular_gauge_widget = CircularGaugeWidget(100, 100, [-1000, 0, 1000, 3500, 5000, 6000], [Colors.BLUE, Colors.GREEN, Colors.LIGHT_GREEN, Colors.ORANGE, Colors.RED], self.sensor.data_type.unit, self.title, None)
         main_layout.addWidget(self.circular_gauge_widget)
 
     def sensor_state_changed(self, state, old_state):

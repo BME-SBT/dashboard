@@ -16,7 +16,7 @@ class MotorTemperatureWidget(AbstractPanelElement):
         main_layout.setContentsMargins(0, 0, 0, 0)
 
         # Panel value
-        self.bar_widget = BarWidget(70, 270, [20, 65, 85, 110], [Colors.GREEN, Colors.ORANGE, Colors.RED], self.sensor.data_type.unit, self.title, False)
+        self.bar_widget = BarWidget(70, 270, [20, 65, 85, 110], [Colors.GREEN, Colors.ORANGE, Colors.RED], self.sensor.data_type.unit, self.title, False, 1)
         main_layout.addWidget(self.bar_widget)
 
     def sensor_state_changed(self, state, old_state):

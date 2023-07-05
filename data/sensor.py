@@ -3,6 +3,7 @@ from data.data_types import DataType
 from enum import Enum
 import time
 
+
 class SensorState(Enum):
     NO_DATA = 0,
     NORMAL = 1,
@@ -10,7 +11,8 @@ class SensorState(Enum):
 
 
 class Sensor:
-    def __init__(self, id: int, data_type: DataType, name: str, update_frequency: int, missing_data_multiplier: int = 5):
+    def __init__(self, id: int, data_type: DataType, name: str, update_frequency: int,
+                 missing_data_multiplier: int = 10):
         self.id = id
         self.name = name
         self.data_type = data_type
@@ -28,7 +30,7 @@ class Sensor:
 
     def add_statechange_handler(self, callback):
         self.statechange_handlers.append(callback)
-    
+
     def add_data(self, data):
         value = self.data_type.get_value(data)
         self.last_updated = time.time()
@@ -38,13 +40,13 @@ class Sensor:
         self._set_value(value)
 
     def _set_value(self, value):
-        oldval = self.value
         self.value = value
 
         print(f"{self.name}: {self.value}")
 
         for valuechange_handler in self.valuechange_handlers:
             valuechange_handler(self.value, self.name)
+
     def _set_state(self, state: SensorState):
         if self.state != state:
             oldstate = self.state

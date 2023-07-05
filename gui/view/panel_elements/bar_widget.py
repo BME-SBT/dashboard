@@ -10,8 +10,8 @@ from data.sensor import SensorState
 
 class BarWidget(AbstractGaugeWidget):
     refresh = QtCore.Signal()
-    def __init__(self, height, width,  tresholds, colors, unit, name, isVertical):
-        super().__init__(height, width,  tresholds, colors, unit, name)
+    def __init__(self, height, width,  tresholds, colors, unit, name, isVertical, rounding):
+        super().__init__(height, width,  tresholds, colors, unit, name, rounding)
 
         self.isVertical = isVertical
         self.padding = 5
@@ -118,7 +118,7 @@ class BarWidget(AbstractGaugeWidget):
             return
         # ertek amit mutat a mutato
         pointer_value = self.value
-        text_value = round(self.value)
+        text_value = round(self.value, self.rounding)
         if(self.value < self.min_value):
             pointer_value = self.min_value
         if(self.value > self.max_value):
@@ -128,7 +128,7 @@ class BarWidget(AbstractGaugeWidget):
         pen = QtGui.QPen(self.text_color.value)
         pen.setWidth(1)
         pen.setCapStyle(Qt.PenCapStyle.FlatCap)
-        painter.setFont(QFont('Arial', 20))
+        painter.setFont(QFont('Arial', 15))
         painter.setPen(pen)
         painter.setRenderHint(QPainter.Antialiasing, True)
         

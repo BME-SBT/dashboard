@@ -18,7 +18,7 @@ class MotorPowerWidget(AbstractPanelElement):
         main_layout.setContentsMargins(0, 0, 0, 0)
 
         # Panel value
-        self.circular_gauge_widget = CircularGaugeWidget(120, 120, [0, 1, 4, 6], [Colors.GREEN, Colors.ORANGE, Colors.RED], self.sensor.data_type.unit, self.title)
+        self.circular_gauge_widget = CircularGaugeWidget(120, 120, [0, 1, 4, 6], [Colors.GREEN, Colors.ORANGE, Colors.RED], self.sensor.data_type.unit, self.title, 1)
         main_layout.addWidget(self.circular_gauge_widget)
 
     def sensor_state_changed(self, state, old_state):
@@ -31,4 +31,11 @@ class MotorPowerWidget(AbstractPanelElement):
         #     self.value_label.setStyleSheet("color: black")
 
     def sensor_value_changed(self, value, old_value):
-       self.circular_gauge_widget.sensor_value_changed(value / 1000) # mW != W :D
+        watt = value/1000
+
+        if watt < 1000:
+            self.circular_gauge_widget.sensor_value_changed(watt, watt / 1000) # mW != W :D
+            print(watt, watt / 1000)
+        else:
+            print(watt)
+            self.circular_gauge_widget.sensor_value_changed(watt / 1000)
