@@ -37,7 +37,7 @@ class CircularGaugeWidget(AbstractGaugeWidget):
         main_layout = QVBoxLayout(self)
         main_layout.addWidget(self.canvas_label)
         # main_layout.addWidget(self.canvas_pointer_label)
-        self.refresh.connect(self.update)
+        # self.refresh.connect(self.update)
         self.draw_gauge()
 
     def sensor_state_changed(self, state: SensorState):
@@ -55,7 +55,7 @@ class CircularGaugeWidget(AbstractGaugeWidget):
     def sensor_value_changed(self, value, custom_bar=None):
         self.custom_bar = custom_bar
         if value is not None:
-            print("update geci")
+            #print("update geci")
             self.value = value
             self.refresh.emit()
 
@@ -146,8 +146,7 @@ class CircularGaugeWidget(AbstractGaugeWidget):
         self.canvas_label.setPixmap(canvas)
 
     def paintEvent(self, event):
-
-        print(self, "repaint", self.value)
+        # print(self, "repaint", self.value)
         self.draw_gauge()
-        print(self, "drawpointer: ", self.value)
+        # print(self, "drawpointer: ", self.value)
         self.draw_pointer()

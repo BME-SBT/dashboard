@@ -6,8 +6,8 @@ from data.sensor_manager import SensorManager
 
 
 class TextSensorWidget(QWidget):
-
-    sensor_value_changed = Signal(str)
+    value_changed_signal = Signal(float, str)
+    state_changed_signal = Signal(SensorState, SensorState)
 
     def __init__(self, title: str, sensor_id: int):
         super().__init__()
@@ -26,11 +26,10 @@ class TextSensorWidget(QWidget):
 
         sensor = SensorManager.get_sensor(sensor_id)
         if sensor:
-            sensor.add_valuechange_handler(
-                lambda v, oldval: self.sensor_value_changed.emit(str(v)))
-            self.sensor_value_changed.connect(
+            sensor.add_qt_valuechange_handler(self)
+            self.value_changed_signal.connect(
                 lambda s: self.value_label.setText(f"{s} {sensor.data_type.unit}"))
-            sensor.add_statechange_handler(self.sensor_state_changed)
+            self.state_changed_signal.connect(self.sensor_state_changed)
         else:
             self.value_label.setText('<invalid sensor>')
 

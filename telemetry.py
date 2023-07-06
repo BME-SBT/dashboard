@@ -153,7 +153,7 @@ def start_can_listening():
     LOGGER.info("CAN thread started")
 
     for sensor in SensorManager.get_sensors():
-        sensor.add_valuechange_handler(lambda v, name: upload_messages(v,name))
+        sensor.add_valuechange_handler(lambda v, name: upload_messages(v, name))
 
     while True:
         try:

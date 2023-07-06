@@ -147,10 +147,10 @@ def build_sensor_array():
                "error_motor_switch_position", 10))
     SensorManager.add_sensor(
         Sensor(SensorId.LOWEST_CELL_VOLTAGE.value, data.data_types.VOLTAGE_MV, "lowest_cell_voltage",
-               1))
+               10))
     SensorManager.add_sensor(
         Sensor(SensorId.HIGHEST_CELL_VOLTAGE.value, data.data_types.VOLTAGE_MV, "highest_cell_voltage",
-               1))
+               10))
 
     LOGGER.info(f"lcm frequency: {SensorManager.lcm_frequency()}")
 

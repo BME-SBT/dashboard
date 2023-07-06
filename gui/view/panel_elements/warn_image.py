@@ -1,11 +1,13 @@
 from PySide2.QtGui import QPixmap
 from PySide2.QtWidgets import QLabel
-
+from PySide2.QtCore import Signal
 from data.sensor import SensorState
 from data.sensor_manager import SensorManager
 
 
 class WarnImage(QLabel):
+    value_changed_signal = Signal(float, str)
+    state_changed_signal = Signal(SensorState, SensorState)
     def __init__(self, id: int, name: str, value_validator, state_validator=None, init_false = False, *args, **kwargs):
         super().__init__(None, *args, **kwargs)
         self.setFixedHeight(45)
@@ -22,8 +24,11 @@ class WarnImage(QLabel):
         self.state_validator = state_validator
         self.value_validator = value_validator
 
-        SensorManager.get_sensor(id).add_statechange_handler(lambda v, ov: self.state_changed(v, ov))
-        SensorManager.get_sensor(id).add_valuechange_handler(lambda v, name: self.value_changed(v, name))
+        SensorManager.get_sensor(id).add_qt_statechange_handler(self)
+        SensorManager.get_sensor(id).add_qt_valuechange_handler(self)
+
+        self.state_changed_signal.connect(self.state_changed)
+        self.value_changed_signal.connect(self.value_changed)
 
     def state_changed(self, v, ov):
         if self.state_validator is not None:

@@ -6,9 +6,10 @@ from gui.view.panel_elements.bar_widget import BarWidget
 from gui.view.colors import Colors
 from data.sensor_ids import SensorId
 from gui.view.panel_elements.text_sensor_widget import TextSensorWidget
-
+from PySide2.QtCore import Signal
 
 class BatteryTemperatureWidget(TextSensorWidget):
+
     def __init__(self):
         super().__init__(title='B.TMP', sensor_id=SensorId.BATTERY_TEMPERATURE_1_2_3.value)
 

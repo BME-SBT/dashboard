@@ -5,9 +5,14 @@ from gui.view.panel_elements.abstract_panel_elements.abstract_panel_element impo
 from gui.view.panel_elements.bar_widget import BarWidget
 from gui.view.colors import Colors
 from data.sensor_ids import SensorId
+from PySide2.QtCore import Signal
 
 
 class BatteryTemperatureWidget(AbstractPanelElement):
+
+    value_changed_signal = Signal(float, str)
+    state_changed_signal = Signal(SensorState, SensorState)
+
     def __init__(self):
         super().__init__(title='B.TMP', sensor_id=SensorId.BATTERY_TEMPERATURE_1_2_3.value)
 
