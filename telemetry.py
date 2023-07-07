@@ -147,6 +147,12 @@ def build_sensor_array():
     SensorManager.add_sensor(
         Sensor(SensorId.ERROR_MOTOR_SWITCH_POSITION.value, data.data_types.SWITCH_POSITION,
                "error_motor_switch_position", 10))
+    SensorManager.add_sensor(
+        Sensor(SensorId.LOWEST_CELL_VOLTAGE.value, data.data_types.VOLTAGE_MV, "lowest_cell_voltage",
+               10))
+    SensorManager.add_sensor(
+        Sensor(SensorId.HIGHEST_CELL_VOLTAGE.value, data.data_types.VOLTAGE_MV, "highest_cell_voltage",
+               10))
 
 
 def start_can_listening():
@@ -177,15 +183,20 @@ client = InfluxDBClient(url="http://influx.solarboatteam.hu:8086",
                         org="sbt")
 write_api = client.write_api(write_options=ASYNCHRONOUS)
 
+last_upload = {}
+
 
 def upload_messages(val, name):
-    p = Point("data").field(name, val)
-    write_api.write(bucket=bucket_name, record=p)
+    if name not in last_upload or last_upload[name] + 1 < time.time():
+        p = Point("data").field(name, val)
+        write_api.write(bucket=bucket_name, record=p)
+        print('sent')
+        last_upload[name] = time.time()
+        print(name, val, last_upload[name])
 
 
 def main():
     build_sensor_array()
-
 
     start_can_listening()
 
