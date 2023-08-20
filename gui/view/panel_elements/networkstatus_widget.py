@@ -6,7 +6,7 @@ from data.sensor_ids import SensorId
 from data.sensor_manager import SensorManager
 
 
-class HeartbeatImage(QLabel):
+class NetworkstatusImage(QLabel):
     value_changed_signal = Signal(float, str)
     state_changed_signal = Signal(SensorState, SensorState)
 
