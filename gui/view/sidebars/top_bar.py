@@ -46,13 +46,7 @@ class TopBar(QWidget):
             0b00010010000, "battery_temp_warn", lambda v, name: v >= 50.0
         )
 
-        self.motor_on_ok = WarnImage(
-            0b00001010010,
-            "motor_on",
-            lambda v, name: True,
-            lambda s, os: s == SensorState.NORMAL,
-            True,
-        )
+        self.motor_on_ok = MotorHeartbeatImage()
         self.heartbeat = HeartbeatImage()
         self.networkstatus = NetworkstatusImage()
 

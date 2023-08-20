@@ -425,6 +425,14 @@ def build_sensor_array():
             10,
         )
     )
+    SensorManager.add_sensor(
+        Sensor(
+            SensorId.MOTOR_TELEMETRY_HEARTBEAT.value,
+            data.data_types.DataType(data.data_types.NumberType.UNSIGNED_CHAR, 1, ""),
+            "motor_telemetry_heartbeat",
+            1,
+        )
+    )
 
 
 def start_can_listening():

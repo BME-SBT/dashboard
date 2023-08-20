@@ -9,8 +9,8 @@ class NumberType(Enum):
     UNSIGNED_INT = ">I"
     SHORT = ">h"
     UNSIGNED_SHORT = ">H"
-    CHAR = ">"
-    UNSIGNED_CHAR = ">"
+    CHAR = ">b"
+    UNSIGNED_CHAR = ">c"
 
 
 class DataType:

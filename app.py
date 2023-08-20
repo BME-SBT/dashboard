@@ -432,6 +432,14 @@ def build_sensor_array():
             0.2,
         )
     )
+    SensorManager.add_sensor(
+        Sensor(
+            SensorId.MOTOR_TELEMETRY_HEARTBEAT.value,
+            data.data_types.DataType(data.data_types.NumberType.UNSIGNED_CHAR, 1, ""),
+            "motor_telemetry_heartbeat",
+            1,
+        )
+    )
 
     LOGGER.info(f"lcm frequency: {SensorManager.lcm_frequency()}")
 
