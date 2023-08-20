@@ -8,7 +8,17 @@ from data.sensor_manager import SensorManager
 class WarnImage(QLabel):
     value_changed_signal = Signal(float, str)
     state_changed_signal = Signal(SensorState, SensorState)
-    def __init__(self, id: int, name: str, value_validator, state_validator=None, init_false = False, *args, **kwargs):
+
+    def __init__(
+        self,
+        id: int,
+        name: str,
+        value_validator,
+        state_validator=None,
+        init_false=False,
+        *args,
+        **kwargs,
+    ):
         super().__init__(None, *args, **kwargs)
         self.setFixedHeight(45)
         self.setFixedWidth(45)
@@ -37,8 +47,12 @@ class WarnImage(QLabel):
             else:
                 self.setPixmap(self.blank_picture)
         else:
-            if ov == SensorState.NO_DATA and v == SensorState.NORMAL:
+            if (ov == SensorState.NO_DATA and v == SensorState.NORMAL) or (
+                ov == SensorState.MISSING_DATA and v == SensorState.NORMAL
+            ):
                 self.setPixmap(self.blank_picture)
+            elif ov == SensorState.NORMAL and v != SensorState.NORMAL:
+                self.setPixmap(self.warn_image)
 
     def value_changed(self, v, name):
         if self.value_validator(v, name):

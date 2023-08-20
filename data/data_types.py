@@ -3,14 +3,14 @@ import struct
 
 
 class NumberType(Enum):
-    FLOAT = '>f'
-    DOUBLE = '>d'
-    INT = '>i'
-    UNSIGNED_INT = '>I'
-    SHORT = '>h'
-    UNSIGNED_SHORT = '>H'
-    CHAR = '>'
-    UNSIGNED_CHAR = '>'
+    FLOAT = ">f"
+    DOUBLE = ">d"
+    INT = ">i"
+    UNSIGNED_INT = ">I"
+    SHORT = ">h"
+    UNSIGNED_SHORT = ">H"
+    CHAR = ">"
+    UNSIGNED_CHAR = ">"
 
 
 class DataType:
@@ -30,24 +30,41 @@ class DataType:
         return struct.pack(self.number_type.value, int((value / self.resolution)))
 
 
-RPM = DataType(NumberType.SHORT, 1, '1/min')
-TEMPERATURE = DataType(NumberType.SHORT, 0.1, '°C')
-CURRENT = DataType(NumberType.SHORT, 0.1, 'A')
-MCURRENT = DataType(NumberType.SHORT, 1, 'mA')
-VOLTAGE = DataType(NumberType.SHORT, 0.1, 'V')
-VOLTAGE_MV = DataType(NumberType.SHORT, 1, 'mV')
-SOC = DataType(NumberType.UNSIGNED_SHORT, 0.1, '%')
-THROTTLE_POSITION = DataType(NumberType.SHORT, 1, '%')
-SWITCH_POSITION = DataType(NumberType.UNSIGNED_SHORT, 1, '')
-GPS_POSITION = DataType(NumberType.FLOAT, 1, '°')
-SPEED = DataType(NumberType.SHORT, 0.1, 'km/h')
-ROLL_PITCH_DEGREE = DataType(NumberType.SHORT, 1, '°')
-HEADING = DataType(NumberType.UNSIGNED_SHORT, 1, 'sec')
-ABSOLUTTIME = DataType(NumberType.UNSIGNED_INT, 1, 'sec')
-POWER = DataType(NumberType.INT, 1, 'mW')
-ACCELERATION = DataType(NumberType.SHORT, 1, 'm/s^2')
-FLOW = DataType(NumberType.UNSIGNED_SHORT, 1, 'L\sec')
-DISTANCE = DataType(NumberType.SHORT, 1, 'mm')
-LEVEL = DataType(NumberType.UNSIGNED_SHORT, 1, '%')
-PERCENT = DataType(NumberType.SHORT, 0.1, '%')
-DEGREE = DataType(NumberType.SHORT, 0.1, '°')
+class BoolDataType(DataType):
+    def __init__(self):
+        # necessary to call super().__init__ to initialize the DataType class, only with garbage values
+        super().__init__(None, 1, "")
+
+    def get_value(self, data):
+        return data[0] == 0x1
+
+    def get_text_value(self, data):
+        val = self.get_value(data)
+        return str(val)
+
+    def to_raw(self, value):
+        return [0x0] if not value else [0x1]
+
+
+RPM = DataType(NumberType.SHORT, 1, "1/min")
+TEMPERATURE = DataType(NumberType.SHORT, 0.1, "°C")
+CURRENT = DataType(NumberType.SHORT, 0.1, "A")
+MCURRENT = DataType(NumberType.SHORT, 1, "mA")
+VOLTAGE = DataType(NumberType.SHORT, 0.1, "V")
+VOLTAGE_MV = DataType(NumberType.SHORT, 1, "mV")
+SOC = DataType(NumberType.UNSIGNED_SHORT, 0.1, "%")
+THROTTLE_POSITION = DataType(NumberType.SHORT, 1, "%")
+SWITCH_POSITION = DataType(NumberType.UNSIGNED_SHORT, 1, "")
+GPS_POSITION = DataType(NumberType.FLOAT, 1, "°")
+SPEED = DataType(NumberType.SHORT, 0.1, "km/h")
+ROLL_PITCH_DEGREE = DataType(NumberType.SHORT, 1, "°")
+HEADING = DataType(NumberType.UNSIGNED_SHORT, 1, "sec")
+ABSOLUTTIME = DataType(NumberType.UNSIGNED_INT, 1, "sec")
+POWER = DataType(NumberType.INT, 1, "mW")
+ACCELERATION = DataType(NumberType.SHORT, 1, "m/s^2")
+FLOW = DataType(NumberType.UNSIGNED_SHORT, 1, "L\sec")
+DISTANCE = DataType(NumberType.SHORT, 1, "mm")
+LEVEL = DataType(NumberType.UNSIGNED_SHORT, 1, "%")
+PERCENT = DataType(NumberType.SHORT, 0.1, "%")
+DEGREE = DataType(NumberType.SHORT, 0.1, "°")
+BOOL = BoolDataType()

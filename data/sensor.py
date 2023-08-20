@@ -2,19 +2,23 @@ from struct import unpack
 from data.data_types import DataType
 from enum import Enum
 import time
-from PySide2.QtCore import SIGNAL
-from PySide2.QtWidgets import QApplication
-
 
 
 class SensorState(Enum):
-    NO_DATA = 0,
-    NORMAL = 1,
-    MISSING_DATA = 2,
+    NO_DATA = (0,)
+    NORMAL = (1,)
+    MISSING_DATA = (2,)
+
 
 class Sensor:
-    def __init__(self, id: int, data_type: DataType, name: str, update_frequency: int,
-                 missing_data_multiplier: int = 10):
+    def __init__(
+        self,
+        id: int,
+        data_type: DataType,
+        name: str,
+        update_frequency: float,
+        missing_data_multiplier: int = 10,
+    ):
         self.id = id
         self.name = name
         self.data_type = data_type
@@ -70,6 +74,8 @@ class Sensor:
 
     def timer_tick(self):
         update_interval = 1 / self.update_frequency
-        if time.time() > (self.last_updated + (update_interval * self.missing_data_multiplier)):
+        if time.time() > (
+            self.last_updated + (update_interval * self.missing_data_multiplier)
+        ):
             if self.state == SensorState.NORMAL:
                 self._set_state(SensorState.MISSING_DATA)

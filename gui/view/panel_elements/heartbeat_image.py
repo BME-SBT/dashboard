@@ -14,12 +14,10 @@ class HeartbeatImage(QLabel):
         self.visible = False
 
         self.timer = QTimer(None)
-        self.connect(self.timer,SIGNAL('timeout()'),self.timer_update)
+        self.connect(self.timer, SIGNAL("timeout()"), self.timer_update)
         self.timer.singleShot = False
         self.timer.start(500)
-        print("HELLLLOOOOO")
 
     def timer_update(self):
-        print("HMMMM")
         self.visible = not self.visible
         self.setPixmap(self.warn_image if self.visible else self.blank_picture)
